@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block titre %}Mes tâches{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Accueil</a> | <a href="{{ url_for('ajouter') }}">Ajouter</a>
+    </nav>
+    <hr>
+
+    
+    {% for message in get_flashed_messages() %}
+    <p class="flash" style="color: green; background: #eef; padding: 5px;">{{ message }}</p>
+    {% endfor %}
+    {% block contenu %}
+    
+    {% endblock %}
+</body>
+</html>

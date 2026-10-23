@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block titre %}
+    Mes tâches - {{ super() }}
+{% endblock %}
+
+{% block contenu %}
+    <h1>Mes tâches</h1>
+<p>
+    Filtres : 
+    <a href="{{ url_for('index', filtre='toutes') }}">Toutes</a> | 
+    <a href="{{ url_for('index', filtre='actives') }}">Actives</a> | 
+    <a href="{{ url_for('index', filtre='terminees') }}">Terminées</a>
+</p>
+    <ul>
+        {% for t in taches %}
+            <li>
+                {{ loop.index }} - 
+                {% if t.terminee %}
+                    <s>{{ t.titre | upper }}</s> (Terminée)
+                {% else %}
+                    {{ t.titre | upper }} (En cours)
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <p>Nombre de tâches restantes : {{ (taches | rejectattr('terminee')) | list | length }}</p>
+    
+    {{ inconnue }}
+{% endblock %}
+
+TESTAAAAAA
+</body>
+</html>
